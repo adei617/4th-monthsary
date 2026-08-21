@@ -14,16 +14,60 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+
+    <!-- =========================================
+         PASSCODE / AUTH OVERLAY
+    ========================================== -->
+    <div class="auth-overlay" id="authOverlay">
+
+        <div class="auth-overlay__decor auth-overlay__decor--one" aria-hidden="true"></div>
+        <div class="auth-overlay__decor auth-overlay__decor--two" aria-hidden="true"></div>
+
+        <div class="auth-overlay__heart heart-trigger" aria-hidden="true">♡</div>
+
+        <p class="eyebrow">A little something, just for you</p>
+
+        <h1 class="auth-overlay__title">Enter Our Code</h1>
+
+        <p class="auth-overlay__subtitle">
+            You know it by heart.
+        </p>
+
+        <div class="auth-overlay__dots" id="authDots" aria-hidden="true"></div>
+
+        <p class="auth-overlay__error" id="authError" role="alert">&nbsp;</p>
+
+        <div class="auth-overlay__keypad" id="authKeypad">
+            <button type="button" class="auth-overlay__key" data-key="1">1</button>
+            <button type="button" class="auth-overlay__key" data-key="2">2</button>
+            <button type="button" class="auth-overlay__key" data-key="3">3</button>
+            <button type="button" class="auth-overlay__key" data-key="4">4</button>
+            <button type="button" class="auth-overlay__key" data-key="5">5</button>
+            <button type="button" class="auth-overlay__key" data-key="6">6</button>
+            <button type="button" class="auth-overlay__key" data-key="7">7</button>
+            <button type="button" class="auth-overlay__key" data-key="8">8</button>
+            <button type="button" class="auth-overlay__key" data-key="9">9</button>
+            <button type="button" class="auth-overlay__key auth-overlay__key--ghost" tabindex="-1" aria-hidden="true"></button>
+            <button type="button" class="auth-overlay__key" data-key="0">0</button>
+            <button type="button" class="auth-overlay__key auth-overlay__key--back" data-key="back" aria-label="Delete">⌫</button>
+        </div>
+
+    </div>
+
+
+    <!-- Floating hearts layer -->
+    <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
+
 
     <!-- Decorative Background Elements -->
     <div class="background-decoration background-decoration--one"></div>
     <div class="background-decoration background-decoration--two"></div>
 
-    <main>
+    <main id="mainContent" inert>
 
         <!-- =========================================
              HERO SECTION
@@ -43,7 +87,7 @@
 
                 <div class="hero__divider" aria-hidden="true">
                     <span></span>
-                    <i>♡</i>
+                    <i class="heart-trigger">♡</i>
                     <span></span>
                 </div>
 
@@ -81,51 +125,71 @@
                 </h2>
             </div>
 
-            <article class="love-card">
+            <div class="envelope-scene" id="envelopeScene">
 
-                <div class="love-card__ornament" aria-hidden="true">
-                    ♡
+                <div class="envelope" id="envelope">
+
+                    <div class="envelope__letter" id="envelopeLetter">
+
+                        <article class="love-card">
+
+                            <div class="love-card__ornament heart-trigger" aria-hidden="true">
+                                ♡
+                            </div>
+
+                            <p class="love-card__opening">
+                                My beb,
+                            </p>
+
+                            <div class="love-card__message">
+                                <p>
+                                   Four months may sound like a small amount of time po,
+                                    but somehow, you've managed to become such a beautiful
+                                    part of my everyday life po. </p>
+
+                            <p>
+                                Thank you po for every laugh, every conversation that
+                                lasted longer than we planned, every little moment
+                                that became a memory, and every time you made an
+                                ordinary day feel a little more special po.
+                            </p>
+
+                            <p>
+                                I don't know exactly what the future will look like po,
+                                but I know I want to keep discovering it with you po.
+                                More sunsets. More random conversations. More
+                                adventures. More silly moments. More reasons to
+                                fall for you over and over again po.
+                            </p>
+
+                            <p>
+                                Happy fourth monthsary, my love po.
+                                Here's to the four months we've shared,
+                                and to all the beautiful chapters still waiting
+                                for us po.
+                                </p>
+                            </div>
+
+                            <div class="love-card__signature">
+                                <span>- Adei,</span>
+                                <strong>With all my love ♡</strong>
+                            </div>
+
+                        </article>
+
+                    </div>
+
+                    <div class="envelope__flap"></div>
+
+                    <button type="button" class="envelope__seal" id="envelopeSeal" aria-label="Open the letter">♡</button>
+
+                    <div class="envelope__pocket"></div>
+
                 </div>
 
-                <p class="love-card__opening">
-                    My beb,
-                </p>
+                <p class="envelope__hint" id="envelopeHint">Tap the heart to open</p>
 
-                <div class="love-card__message">
-                    <p>
-                       Four months may sound like a small amount of time po,
-						but somehow, you've managed to become such a beautiful
-						part of my everyday life po. </p>
-
-                <p>
-                    Thank you po for every laugh, every conversation that
-                    lasted longer than we planned, every little moment
-                    that became a memory, and every time you made an
-                    ordinary day feel a little more special po.
-                </p>
-
-                <p>
-                    I don't know exactly what the future will look like po,
-                    but I know I want to keep discovering it with you po.
-                    More sunsets. More random conversations. More
-                    adventures. More silly moments. More reasons to
-                    fall for you over and over again po.
-                </p>
-
-                <p>
-                    Happy fourth monthsary, my love po.
-                    Here's to the four months we've shared,
-                    and to all the beautiful chapters still waiting
-                    for us po.
-                    </p>
-                </div>
-
-                <div class="love-card__signature">
-                    <span>- Adei,</span>
-                    <strong>With all my love ♡</strong>
-                </div>
-
-            </article>
+            </div>
 
         </section>
 
@@ -261,7 +325,7 @@
 
             <div class="closing__content">
 
-                <div class="closing__heart" aria-hidden="true">
+                <div class="closing__heart heart-trigger" aria-hidden="true">
                     ♡
                 </div>
 
@@ -298,11 +362,14 @@
     <footer class="footer">
 
         <p>
-            Made with love, for my favorite person.
+            Made with love, for my favorite person, baby, beb.
             <span aria-hidden="true">♡</span>
         </p>
 
     </footer>
+
+    <!-- Main Script -->
+    <script src="script.js"></script>
 
 </body>
 </html>
