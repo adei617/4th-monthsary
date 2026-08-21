@@ -1,0 +1,783 @@
+/* =========================================================
+   FOURTH MONTHSARY WEBSITE
+   Main Stylesheet
+   ========================================================= */
+
+
+/* =========================================================
+   1. DESIGN TOKENS / VARIABLES
+   ========================================================= */
+
+:root {
+
+    /* Color Palette */
+    --color-rose: #9d4f61;
+    --color-rose-dark: #713342;
+    --color-rose-deep: #4c2632;
+
+    --color-blush: #f4dfe1;
+    --color-blush-light: #fbf0f0;
+
+    --color-cream: #fcf8f1;
+    --color-cream-dark: #f3e9dc;
+
+    --color-gold: #b8965a;
+    --color-gold-light: #d8c08a;
+
+    --color-white: #ffffff;
+    --color-text: #38252b;
+    --color-text-soft: #755e64;
+
+    /* Typography */
+    --font-display: "Cormorant Garamond", Georgia, serif;
+    --font-body: "Inter", Arial, sans-serif;
+
+    /* Layout */
+    --container-width: 1180px;
+    --section-padding: 6rem 1.25rem;
+
+    /* Effects */
+    --shadow-soft: 0 20px 60px rgba(76, 38, 50, 0.10);
+    --shadow-hover: 0 25px 70px rgba(76, 38, 50, 0.20);
+
+    --transition: 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   2. RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--color-cream);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   3. GLOBAL TYPOGRAPHY
+   ========================================================= */
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 0.95;
+}
+
+h1 span,
+h2 em {
+    color: var(--color-rose);
+    font-style: italic;
+}
+
+.eyebrow {
+    color: var(--color-gold);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   4. BACKGROUND DECORATION
+   ========================================================= */
+
+.background-decoration {
+    position: fixed;
+    z-index: -1;
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(70px);
+    opacity: 0.4;
+}
+
+.background-decoration--one {
+    top: -10rem;
+    right: -8rem;
+    background: var(--color-blush);
+}
+
+.background-decoration--two {
+    bottom: 10%;
+    left: -12rem;
+    background: rgba(216, 192, 138, 0.25);
+}
+
+
+/* =========================================================
+   5. HERO SECTION
+   ========================================================= */
+
+.hero {
+    position: relative;
+    display: flex;
+    min-height: 100svh;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 1.5rem;
+    text-align: center;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(252, 248, 241, 0.5),
+            rgba(244, 223, 225, 0.4)
+        );
+}
+
+.hero::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(80vw, 700px);
+    height: min(80vw, 700px);
+    border: 1px solid rgba(184, 150, 90, 0.2);
+    border-radius: 50%;
+    content: "";
+    transform: translate(-50%, -50%);
+}
+
+.hero::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(65vw, 570px);
+    height: min(65vw, 570px);
+    border: 1px solid rgba(157, 79, 97, 0.08);
+    border-radius: 50%;
+    content: "";
+    transform: translate(-50%, -50%);
+}
+
+.hero__content {
+    position: relative;
+    z-index: 1;
+    max-width: 850px;
+}
+
+.hero h1 {
+    margin-top: 1.25rem;
+    font-size: clamp(4rem, 15vw, 9.5rem);
+    letter-spacing: -0.04em;
+}
+
+.hero__divider {
+    display: flex;
+    width: min(100%, 250px);
+    align-items: center;
+    gap: 0.8rem;
+    margin: 2rem auto;
+}
+
+.hero__divider span {
+    height: 1px;
+    flex: 1;
+    background: var(--color-gold-light);
+}
+
+.hero__divider i {
+    color: var(--color-rose);
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    font-style: normal;
+}
+
+.hero__intro {
+    max-width: 560px;
+    margin: 0 auto;
+    color: var(--color-text-soft);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.hero__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.25rem;
+    padding: 0.9rem 1.4rem;
+    border: 1px solid var(--color-rose);
+    color: var(--color-rose-dark);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition:
+        background-color var(--transition),
+        color var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+.hero__button span {
+    font-size: 1rem;
+    transition: transform var(--transition);
+}
+
+.hero__button:hover {
+    background: var(--color-rose);
+    color: var(--color-white);
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-3px);
+}
+
+.hero__button:hover span {
+    transform: translateY(3px);
+}
+
+.hero__scroll {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--color-text-soft);
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transform: translateX(-50%);
+}
+
+.hero__scroll span {
+    width: 20px;
+    height: 30px;
+    border: 1px solid var(--color-gold);
+    border-radius: 20px;
+}
+
+.hero__scroll span::after {
+    display: block;
+    width: 3px;
+    height: 6px;
+    margin: 6px auto;
+    border-radius: 3px;
+    background: var(--color-gold);
+    content: "";
+    animation: scrollIndicator 1.8s infinite;
+}
+
+
+/* =========================================================
+   6. GLOBAL SECTION
+   ========================================================= */
+
+.section {
+    padding: var(--section-padding);
+}
+
+.section-heading {
+    max-width: var(--container-width);
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.section-heading h2 {
+    margin-top: 0.8rem;
+    font-size: clamp(3rem, 10vw, 6rem);
+}
+
+.section-heading__description {
+    max-width: 500px;
+    margin: 1.25rem auto 0;
+    color: var(--color-text-soft);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.section-heading--light .eyebrow {
+    color: var(--color-gold-light);
+}
+
+.section-heading--light h2 {
+    color: var(--color-white);
+}
+
+.section-heading--light h2 em {
+    color: var(--color-blush);
+}
+
+.section-heading--light .section-heading__description {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+
+/* =========================================================
+   7. LOVE NOTE
+   ========================================================= */
+
+.love-note {
+    position: relative;
+    background: var(--color-cream);
+}
+
+.love-card {
+    position: relative;
+    width: min(100%, 760px);
+    margin: auto;
+    padding: 3rem 1.5rem;
+    border: 1px solid rgba(184, 150, 90, 0.3);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.8),
+            rgba(251, 240, 240, 0.8)
+        );
+    box-shadow: var(--shadow-soft);
+}
+
+.love-card::before,
+.love-card::after {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    content: "";
+}
+
+.love-card::before {
+    top: 12px;
+    left: 12px;
+    border-top: 1px solid var(--color-gold);
+    border-left: 1px solid var(--color-gold);
+}
+
+.love-card::after {
+    right: 12px;
+    bottom: 12px;
+    border-right: 1px solid var(--color-gold);
+    border-bottom: 1px solid var(--color-gold);
+}
+
+.love-card__ornament {
+    display: flex;
+    width: 45px;
+    height: 45px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: var(--color-blush);
+    color: var(--color-rose);
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+}
+
+.love-card__opening {
+    margin-bottom: 1.25rem;
+    color: var(--color-rose);
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+}
+
+.love-card__message {
+    color: var(--color-text-soft);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.love-card__message p + p {
+    margin-top: 1.25rem;
+}
+
+.love-card__signature {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    color: var(--color-text-soft);
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    text-align: right;
+}
+
+.love-card__signature strong {
+    color: var(--color-rose);
+    font-size: 1.45rem;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   8. MEMORIES / PHOTO GALLERY
+   ========================================================= */
+
+.memories {
+    position: relative;
+    background: var(--color-rose-deep);
+    overflow: hidden;
+}
+
+.memories::before {
+    position: absolute;
+    top: -250px;
+    right: -250px;
+    width: 500px;
+    height: 500px;
+    border: 1px solid rgba(216, 192, 138, 0.12);
+    border-radius: 50%;
+    content: "";
+}
+
+.gallery {
+    display: grid;
+    width: min(100%, var(--container-width));
+    margin: auto;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.gallery__item {
+    position: relative;
+    min-height: 280px;
+    margin: 0;
+    overflow: hidden;
+    background: var(--color-rose);
+}
+
+.gallery__item img {
+    height: 100%;
+    min-height: 280px;
+    object-fit: cover;
+    transition:
+        transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
+        filter 500ms ease;
+}
+
+.gallery__item::after {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            to top,
+            rgba(40, 18, 25, 0.8),
+            rgba(40, 18, 25, 0) 60%
+        );
+    content: "";
+    pointer-events: none;
+}
+
+.gallery__item:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.gallery__item:hover img {
+    filter: saturate(1.1);
+    transform: scale(1.07);
+}
+
+.gallery__item figcaption {
+    position: absolute;
+    z-index: 1;
+    right: 1.2rem;
+    bottom: 1rem;
+    left: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--color-white);
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+}
+
+.gallery__item figcaption span {
+    color: var(--color-gold-light);
+    font-family: var(--font-body);
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+}
+
+
+/* =========================================================
+   9. CLOSING SECTION
+   ========================================================= */
+
+.closing {
+    position: relative;
+    display: flex;
+    min-height: 70vh;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-blush-light);
+    text-align: center;
+}
+
+.closing__content {
+    width: min(100%, 700px);
+}
+
+.closing__heart {
+    display: flex;
+    width: 70px;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    border: 1px solid var(--color-gold);
+    border-radius: 50%;
+    color: var(--color-rose);
+    font-family: var(--font-display);
+    font-size: 2rem;
+    animation: heartPulse 3s ease-in-out infinite;
+}
+
+.closing h2 {
+    margin-top: 1rem;
+    color: var(--color-rose-deep);
+    font-size: clamp(3.2rem, 11vw, 6.5rem);
+}
+
+.closing h2 em {
+    color: var(--color-rose);
+}
+
+.closing__text {
+    max-width: 400px;
+    margin: 2rem auto;
+    color: var(--color-text-soft);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.closing__date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--color-gold);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.closing__date span {
+    width: 35px;
+    height: 1px;
+    background: var(--color-gold-light);
+}
+
+
+/* =========================================================
+   10. FOOTER
+   ========================================================= */
+
+.footer {
+    padding: 1.75rem 1rem;
+    background: var(--color-rose-deep);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+}
+
+.footer span {
+    color: var(--color-blush);
+}
+
+
+/* =========================================================
+   11. ANIMATIONS
+   ========================================================= */
+
+@keyframes scrollIndicator {
+
+    0% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(9px);
+    }
+}
+
+
+@keyframes heartPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+
+/* =========================================================
+   12. TABLET RESPONSIVENESS
+   ========================================================= */
+
+@media (min-width: 600px) {
+
+    :root {
+        --section-padding: 8rem 2rem;
+    }
+
+    .love-card {
+        padding: 4rem;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    .gallery__item--large {
+        grid-row: span 2;
+        min-height: 580px;
+    }
+
+    .gallery__item--large img {
+        min-height: 580px;
+    }
+
+    .gallery__item--wide {
+        grid-column: span 2;
+    }
+}
+
+
+/* =========================================================
+   13. DESKTOP RESPONSIVENESS
+   ========================================================= */
+
+@media (min-width: 900px) {
+
+    :root {
+        --section-padding: 9rem 2rem;
+    }
+
+    .hero {
+        padding: 6rem 2rem;
+    }
+
+    .hero__intro {
+        font-size: 1rem;
+    }
+
+    .love-card {
+        padding: 5rem 6rem;
+    }
+
+    .love-card__message {
+        font-size: 1rem;
+        line-height: 1.9;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .gallery__item {
+        min-height: 360px;
+    }
+
+    .gallery__item img {
+        min-height: 360px;
+    }
+
+    .gallery__item--large {
+        grid-column: span 2;
+        grid-row: span 2;
+        min-height: 740px;
+    }
+
+    .gallery__item--large img {
+        min-height: 740px;
+    }
+
+    .gallery__item--wide {
+        grid-column: span 2;
+    }
+
+    .closing {
+        min-height: 80vh;
+    }
+}
+
+
+/* =========================================================
+   14. LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+    .gallery {
+        gap: 1.5rem;
+    }
+
+    .gallery__item {
+        min-height: 400px;
+    }
+
+    .gallery__item img {
+        min-height: 400px;
+    }
+
+    .gallery__item--large,
+    .gallery__item--large img {
+        min-height: 820px;
+    }
+}
+
+
+/* =========================================================
+   15. ACCESSIBILITY / REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
