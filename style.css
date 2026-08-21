@@ -85,6 +85,13 @@ a {
     -webkit-tap-highlight-color: transparent;
 }
 
+button {
+    font-family: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 
 /* =========================================================
    3. GLOBAL TYPOGRAPHY
@@ -397,6 +404,7 @@ h2 em {
     color: var(--color-rose);
     font-family: var(--font-display);
     font-size: 1.6rem;
+    transition: transform var(--transition);
 }
 
 .love-card__opening {
@@ -779,5 +787,422 @@ h2 em {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* =========================================================
+   16. PASSCODE / AUTH OVERLAY
+   ========================================================= */
+
+main[inert] {
+    filter: blur(2px);
+}
+
+.auth-overlay {
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 2rem 1.5rem;
+    background: linear-gradient(160deg, var(--color-cream), var(--color-blush-light) 70%);
+    text-align: center;
+    transition:
+        opacity 650ms var(--transition),
+        visibility 650ms var(--transition);
+}
+
+.auth-overlay__decor {
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.auth-overlay__decor--one {
+    top: -8rem;
+    left: -6rem;
+    width: 18rem;
+    height: 18rem;
+    background: var(--color-blush);
+}
+
+.auth-overlay__decor--two {
+    right: -8rem;
+    bottom: -6rem;
+    width: 16rem;
+    height: 16rem;
+    background: rgba(216, 192, 138, 0.3);
+}
+
+.auth-overlay.is-unlocked {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.auth-overlay__heart {
+    display: flex;
+    width: 62px;
+    height: 62px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--color-gold);
+    border-radius: 50%;
+    color: var(--color-rose);
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    animation: heartPulse 3s ease-in-out infinite;
+}
+
+.auth-overlay__title {
+    margin-top: 0.4rem;
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+    color: var(--color-rose-deep);
+}
+
+.auth-overlay__subtitle {
+    max-width: 320px;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-soft);
+    font-size: 0.85rem;
+    font-weight: 300;
+}
+
+.auth-overlay__dots {
+    display: flex;
+    gap: 0.9rem;
+    margin: 0.75rem 0;
+}
+
+.auth-overlay__dots span {
+    width: 13px;
+    height: 13px;
+    border: 1px solid var(--color-gold);
+    border-radius: 50%;
+    background: transparent;
+    transition:
+        background-color var(--transition),
+        transform var(--transition);
+}
+
+.auth-overlay__dots span.is-filled {
+    background: var(--color-rose);
+    transform: scale(1.15);
+}
+
+.auth-overlay.is-error .auth-overlay__dots {
+    animation: shakeError 480ms ease;
+}
+
+.auth-overlay__error {
+    min-height: 1.1rem;
+    margin-bottom: 0.25rem;
+    color: var(--color-rose-dark);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+}
+
+.auth-overlay__keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 62px);
+    gap: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.auth-overlay__key {
+    display: flex;
+    width: 62px;
+    height: 62px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(184, 150, 90, 0.4);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--color-rose-dark);
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    transition:
+        background-color var(--transition),
+        color var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+.auth-overlay__key:hover {
+    background: var(--color-rose);
+    color: var(--color-white);
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-2px);
+}
+
+.auth-overlay__key:active {
+    transform: translateY(0) scale(0.94);
+}
+
+.auth-overlay__key--ghost {
+    pointer-events: none;
+    background: transparent;
+    border-color: transparent;
+}
+
+.auth-overlay__key--back {
+    font-size: 1.1rem;
+}
+
+
+/* =========================================================
+   17. FLOATING HEARTS
+   ========================================================= */
+
+.hearts-layer {
+    position: fixed;
+    z-index: 500;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -10%;
+    color: var(--color-rose);
+    font-family: var(--font-display);
+    opacity: 0;
+    animation: floatUp var(--heart-duration, 3200ms) ease-in forwards;
+}
+
+@keyframes floatUp {
+
+    0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0) rotate(0deg);
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-115vh) translateX(var(--heart-drift, 0px)) rotate(var(--heart-rotate, 25deg));
+    }
+}
+
+@keyframes shakeError {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-8px);
+    }
+
+    40% {
+        transform: translateX(8px);
+    }
+
+    60% {
+        transform: translateX(-6px);
+    }
+
+    80% {
+        transform: translateX(6px);
+    }
+}
+
+.heart-trigger {
+    cursor: pointer;
+    transition: transform var(--transition);
+}
+
+.heart-trigger:hover {
+    transform: scale(1.15);
+}
+
+
+/* =========================================================
+   18. INTERACTIVE ENVELOPE
+   ========================================================= */
+
+.envelope-scene {
+    width: min(100%, 760px);
+    margin: 0 auto;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    perspective: 1400px;
+}
+
+.envelope__pocket {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    border: 1px solid rgba(184, 150, 90, 0.35);
+    background: linear-gradient(145deg, var(--color-blush), var(--color-cream-dark));
+    box-shadow: var(--shadow-soft);
+}
+
+.envelope__pocket::before {
+    position: absolute;
+    right: 0;
+    bottom: -2px;
+    left: 0;
+    height: 60%;
+    background: linear-gradient(155deg, rgba(157, 79, 97, 0.16), rgba(157, 79, 97, 0));
+    clip-path: polygon(0 100%, 50% 30%, 100% 100%);
+    content: "";
+}
+
+.envelope__flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    height: 58%;
+    background: linear-gradient(165deg, var(--color-rose), var(--color-rose-dark));
+    backface-visibility: hidden;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform 900ms var(--transition);
+    box-shadow: 0 12px 28px rgba(76, 38, 50, 0.18);
+}
+
+.envelope.is-open .envelope__flap {
+    transform: rotateX(180deg);
+}
+
+.envelope__seal {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    z-index: 4;
+    display: flex;
+    width: 52px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-cream);
+    border-radius: 50%;
+    background: var(--color-gold);
+    color: var(--color-white);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    transform: translate(-50%, -50%);
+    transition:
+        transform var(--transition),
+        opacity var(--transition);
+}
+
+.envelope__seal:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.envelope.is-open .envelope__seal {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    pointer-events: none;
+}
+
+.envelope__letter {
+    position: absolute;
+    top: 14%;
+    left: 50%;
+    z-index: 2;
+    width: 90%;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 10px) scale(0.82);
+    transition:
+        transform 800ms 150ms var(--transition),
+        opacity 700ms 150ms var(--transition);
+}
+
+.envelope.is-open .envelope__letter {
+    z-index: 5;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -70px) scale(1);
+}
+
+.envelope__letter .love-card {
+    width: 100%;
+    padding: 1.75rem 1.25rem;
+}
+
+.envelope__hint {
+    margin-top: 1.5rem;
+    color: var(--color-text-soft);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-transform: uppercase;
+    transition: opacity var(--transition);
+}
+
+.envelope-scene.is-released .envelope__pocket,
+.envelope-scene.is-released .envelope__flap,
+.envelope-scene.is-released .envelope__seal {
+    display: none;
+}
+
+.envelope-scene.is-released .envelope {
+    height: auto;
+    perspective: none;
+}
+
+.envelope-scene.is-released .envelope__letter {
+    position: static;
+    width: 100%;
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+
+.envelope-scene.is-released .envelope__letter .love-card {
+    padding: 3rem 1.5rem;
+}
+
+.envelope-scene.is-released .envelope__hint {
+    height: 0;
+    margin: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+@media (min-width: 600px) {
+
+    .envelope {
+        height: 360px;
+    }
+
+    .envelope-scene.is-released .envelope__letter .love-card {
+        padding: 4rem;
+    }
+}
+
+@media (min-width: 900px) {
+
+    .envelope {
+        height: 400px;
+    }
+
+    .envelope-scene.is-released .envelope__letter .love-card {
+        padding: 5rem 6rem;
     }
 }

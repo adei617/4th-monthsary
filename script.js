@@ -58,17 +58,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function unlockSite() {
-        authOverlay.classList.add('is-unlocked');
-        mainContent.removeAttribute('inert');
-        document.documentElement.style.overflow = '';
-        document.body.style.overflow = '';
+    authOverlay.classList.add('is-unlocked');
+    mainContent.removeAttribute('inert');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
 
-        try {
-            sessionStorage.setItem(STORAGE_KEY, 'true');
-        } catch (err) {
-            /* sessionStorage unavailable — unlock still works for this visit */
-        }
+    // Audio Playback
+    const bgMusic = document.getElementById('bgMusic');
+    if (bgMusic) {
+        bgMusic.play().catch(err => {
+            console.log('Autoplay blocked:', err);
+        });
     }
+
+    try {
+        sessionStorage.setItem(STORAGE_KEY, 'true');
+    } catch (err) {}
+}
 
     function handlePasscodeInput(key) {
         if (authOverlay.classList.contains('is-unlocked')) return;
@@ -90,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 authError.textContent = '\u00A0';
                 setTimeout(unlockSite, prefersReducedMotion ? 0 : 250);
             } else {
-                showError("That's not quite it — try again");
+                showError("Mali po be — try po again");
                 setTimeout(resetEntry, prefersReducedMotion ? 0 : 350);
             }
         }
